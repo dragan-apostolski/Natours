@@ -1,0 +1,58 @@
+.btn {
+    &:link, &:visited {
+        font-size: 1.6rem;
+        display: inline-block;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        border-radius: 10rem;
+        transition: all 0.2s; /* animation has to be defined in the initial state*/
+        position: relative; /* setting this to relative so that the btn::after pseudo-element can be positioned relative to this element,
+        instead of relative to the header element which is the first one after this that can be found */
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 1rem 2rem rgba($color-black, 0.4);
+
+        &::after{
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+    }
+
+    &:active {
+        transform: translateY(-1px);
+        box-shadow: 0 .5rem 1rem rgba($color-black, 0.4);
+    }
+
+    &--white {
+        background-color: $color-white;
+        color: $color-grey-dark;
+
+        &::after {
+            background-color: $color-white;
+        }
+    }
+
+    &::after {
+        /* the pseudo element is treated like a child of the button */
+        content: ""; /* for a pseudo element to appear we have to specify the content property, even if it's empty content*/
+        display: inline-block; /* we also have to specify a display prop, which in this case is the same like the display of the btn */
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: all 0.4s ease-out;
+    }
+
+    &--animated {
+        animation: moveInBottom .5s ease-out .75s;
+        animation-fill-mode: backwards; /* automatically apply the styles of the 0% before the animation starts */
+    }
+}
+
+
