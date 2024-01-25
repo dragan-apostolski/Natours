@@ -35,6 +35,11 @@
         }
     }
 
+    &--green {
+        color: $color-white;
+        background-color: $color-primary;
+    }
+
     &::after {
         /* the pseudo element is treated like a child of the button */
         content: ""; /* for a pseudo element to appear we have to specify the content property, even if it's empty content*/
