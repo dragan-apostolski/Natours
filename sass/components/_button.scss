@@ -1,5 +1,7 @@
 .btn {
-    &:link, &:visited {
+    &,
+    &:link,
+    &:visited {
         font-size: $default-font-size;
         display: inline-block;
         text-transform: uppercase;
@@ -9,6 +11,10 @@
         transition: all 0.2s; /* animation has to be defined in the initial state*/
         position: relative; /* setting this to relative so that the btn::after pseudo-element can be positioned relative to this element,
         instead of relative to the header element which is the first one after this that can be found */
+
+        //change for the <button> element
+        border: none;
+        cursor: pointer;
     }
 
     &:hover {
@@ -21,7 +27,9 @@
         }
     }
 
+    &:focus,
     &:active {
+        outline: none;
         transform: translateY(-1px);
         box-shadow: 0 .5rem 1rem rgba($color-black, 0.4);
     }

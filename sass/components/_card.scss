@@ -18,7 +18,7 @@
     // this hides the back part of the side when it is rotated for 180deg,
     // because we display a different container for the back side
     backface-visibility: hidden;
-    border-radius: 3px;
+    border-radius: $default-border-radius;
     box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
 
 
