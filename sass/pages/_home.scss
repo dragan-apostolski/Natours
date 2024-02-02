@@ -16,22 +16,35 @@
   background-position: top;
   transform: skewY(-7deg);  // skews the section for -7 degrees in the Y direction
 
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
+
   & > * {
     // selects all direct children,
     // and skews back for 7 degrees, so that the transform: skewY(-7deg) in the parent is cancelled
     transform: skewY(7deg);
   }
+
 }
 
 .section-tours {
   margin-top: -20rem;
   background-color: $color-gray-light-1;
   padding: 30rem 0 5rem 0;
+
+  @include respond(tab-port) {
+    padding: 25rem 0 5rem 0;
+  }
 }
 
 .section-stories {
   padding: 15rem 0;
   position: relative;
+
+  @include respond(tab-port) {
+    padding: 10rem 0 5rem 0;
+  }
 }
 
 .section-book {
