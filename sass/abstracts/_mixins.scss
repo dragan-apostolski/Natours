@@ -12,3 +12,57 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+
+// MEDIA QUERY MANAGER
+/*
+0 - 600px:  Phone
+600px - 900px: Tablet portrait
+900px - 1200px: Tablet landscape
+1200px - 1800px: Desktop (normal styles, desktop first approach)
+1800px - inf: Big desktops
+
+EMs and REMs in media queries are not affected by our root font size setting (setting font-size: 62.5% in _base.scss
+under the html {} selector).
+That means that one 1rem is always equal to the font-size that is coming from the browser (which is by default 16px).
+But if the user changes it to 20px by increasing it for 20%, than 1rem will be 20px no matter what we have set in our
+root font size definition.
+
+We are using em instead of rem, because rems fail to work in some of the browsers. In general, EMs are the best option
+for usage in media queries.
+
+1em = 16px
+600px = 600/16 = 37.5em
+900px = 900/16 = 56.25em
+1200px = 1200/16 = 75em
+1800px = 1800/16 = 112.5em
+
+ORDER:
+1. base
+2. typography
+3. general layout
+4. page layout
+5. components
+ */
+
+/*
+$breakpoint argument values:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+ */
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 37.5em) { @content }  // 600px
+  }
+  @if $breakpoint == tab-port {
+    @media (max-width: 56.25em) { @content }  // 900px
+  }
+  @if $breakpoint == tab-land {
+    @media (max-width: 75em) { @content }  // 1200px
+  }
+  @if $breakpoint == big-desktop {
+    @media (min-width: 112.5em) { @content } //1800px
+  }
+}

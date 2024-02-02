@@ -1,4 +1,40 @@
 /*
+0 - 600px:  Phone
+600px - 900px: Tablet portrait
+900px - 1200px: Tablet landscape
+1200px - 1800px: Desktop (normal styles, desktop first approach)
+1800px - inf: Big desktops
+
+EMs and REMs in media queries are not affected by our root font size setting (setting font-size: 62.5% in _base.scss
+under the html {} selector).
+That means that one 1rem is always equal to the font-size that is coming from the browser (which is by default 16px).
+But if the user changes it to 20px by increasing it for 20%, than 1rem will be 20px no matter what we have set in our
+root font size definition.
+
+We are using em instead of rem, because rems fail to work in some of the browsers. In general, EMs are the best option
+for usage in media queries.
+
+1em = 16px
+600px = 600/16 = 37.5em
+900px = 900/16 = 56.25em
+1200px = 1200/16 = 75em
+1800px = 1800/16 = 112.5em
+
+ORDER:
+1. base
+2. typography
+3. general layout
+4. page layout
+5. components
+ */
+/*
+$breakpoint argument values:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+ */
+/*
 the following selects does a reset: selects every element, and sets properties to 0 value
  */
 *,
@@ -11,12 +47,37 @@ the following selects does a reset: selects every element, and sets properties t
 }
 
 html {
+  /* we set 1rem to 10px in order to simplify calculations relative to this: 1rem = 10px, 2rem = 20px ... */
   font-size: 62.5%;
-  /* 10 in order to simplify calculations relative to this: 1rem = 10px, 2rem = 20px ... */
+  /*
+      It's important to use the larger ones in from of the smaller ones, since if screen size is 500px,
+      both will apply, but the latter one will be finally applied because it is defined later
+   */
+}
+@media (max-width: 75em) {
+  html {
+    font-size: 56.25%;
+  }
+}
+@media (max-width: 56.25em) {
+  html {
+    font-size: 50%;
+  }
+}
+@media (min-width: 112.5em) {
+  html {
+    font-size: 75%;
+  }
 }
 
 body {
   box-sizing: border-box;
+  padding: 3rem;
+}
+@media (max-width: 75em) {
+  body {
+    padding: 0;
+  }
 }
 
 @keyframes moveInLeft {
@@ -61,7 +122,6 @@ body {
   /*font-size: 16px;*/
   line-height: 1.7;
   color: #777;
-  padding: 3rem;
 }
 
 .heading-primary {
@@ -84,12 +144,23 @@ body {
   /* defines how many times the animation occurs, default is 1 */
   animation-timing-function: ease-out;
 }
+@media (max-width: 37.5em) {
+  .heading-primary--main {
+    font-size: 5rem;
+    letter-spacing: 1rem;
+  }
+}
 .heading-primary--sub {
   display: block;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 1.8rem;
   animation: moveInRight 1.5s ease-out;
+}
+@media (max-width: 37.5em) {
+  .heading-primary--sub {
+    letter-spacing: 0.5rem;
+  }
 }
 
 .heading-secondary {
@@ -102,6 +173,16 @@ body {
   color: transparent;
   letter-spacing: 2px;
   transition: all 0.2s;
+}
+@media (max-width: 56.25em) {
+  .heading-secondary {
+    font-size: 3rem;
+  }
+}
+@media (max-width: 37.5em) {
+  .heading-secondary {
+    font-size: 2.5rem;
+  }
 }
 .heading-secondary:hover {
   transform: skewY(2deg) skewX(15deg);
@@ -645,6 +726,13 @@ body {
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   position: relative;
 }
+@media (max-width: 37.5em) {
+  .header {
+    -webkit-clip-path: none;
+    clip-path: none;
+    height: 100vh;
+  }
+}
 .header__logo-box {
   position: absolute;
   top: 4rem;
@@ -665,8 +753,19 @@ body {
   max-width: 114rem;
   margin: 0 auto;
 }
+@media (max-width: 56.25em) {
+  .row {
+    max-width: 50rem;
+    padding: 0 3rem;
+  }
+}
 .row:not(:last-child) {
   margin-bottom: 8rem;
+}
+@media (max-width: 56.25em) {
+  .row:not(:last-child) {
+    margin-bottom: 6rem;
+  }
 }
 .row::after {
   content: "";
@@ -678,6 +777,17 @@ body {
 }
 .row [class^=col-]:not(:last-child) {
   margin-right: 6rem;
+}
+@media (max-width: 56.25em) {
+  .row [class^=col-]:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 6rem;
+  }
+}
+@media (max-width: 56.25em) {
+  .row [class^=col-] {
+    width: 100% !important;
+  }
 }
 .row .col-1-of-2 {
   width: calc((100% - 6rem)/2);
@@ -716,6 +826,12 @@ body {
   padding-top: 2rem;
   display: inline-block;
 }
+@media (max-width: 56.25em) {
+  .footer__navigation {
+    width: 100%;
+    text-align: center;
+  }
+}
 .footer__list {
   list-style: none;
 }
@@ -741,7 +857,14 @@ body {
 .footer__copyright {
   border-top: 1px solid #f7f7f7;
   padding-top: 2rem;
+  margin-right: 12rem;
   width: 80%;
+}
+@media (max-width: 56.25em) {
+  .footer__copyright {
+    width: 100%;
+    float: none;
+  }
 }
 
 .navigation__checkbox {
@@ -749,8 +872,8 @@ body {
 }
 .navigation__button {
   background-color: #fff;
-  height: 7rem;
-  width: 7rem;
+  height: 5rem;
+  width: 5rem;
   border-radius: 50%;
   position: fixed;
   top: 6rem;
@@ -760,9 +883,15 @@ body {
   text-align: center;
   cursor: pointer;
 }
+@media (max-width: 75em) {
+  .navigation__button {
+    top: 4rem;
+    right: 4rem;
+  }
+}
 .navigation__background {
-  height: 6rem;
-  width: 6rem;
+  height: 4rem;
+  width: 4rem;
   border-radius: 50%;
   position: fixed;
   top: 6.5rem;
@@ -770,6 +899,34 @@ body {
   background-image: radial-gradient(#55c57a, #28b485);
   z-index: 1000;
   transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+}
+@media (max-width: 75em) {
+  .navigation__background {
+    top: 4.5rem;
+    right: 4.5rem;
+  }
+}
+.navigation__icon {
+  position: relative;
+  margin-top: 2.5rem;
+}
+.navigation__icon, .navigation__icon:before, .navigation__icon:after {
+  width: 3rem;
+  height: 2px;
+  background-color: #333;
+  display: inline-block;
+  transition: all 0.2s;
+}
+.navigation__icon:before, .navigation__icon:after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+.navigation__icon:before {
+  top: -0.8rem;
+}
+.navigation__icon:after {
+  top: 0.8rem;
 }
 .navigation__nav {
   height: 100vh;
@@ -817,28 +974,6 @@ body {
   opacity: 1;
   width: 100%;
 }
-.navigation__icon {
-  position: relative;
-  margin-top: 3.5rem;
-}
-.navigation__icon, .navigation__icon:before, .navigation__icon:after {
-  width: 3rem;
-  height: 2px;
-  background-color: #333;
-  display: inline-block;
-  transition: all 0.2s;
-}
-.navigation__icon:before, .navigation__icon:after {
-  content: "";
-  position: absolute;
-  left: 0;
-}
-.navigation__icon:before {
-  top: -0.8rem;
-}
-.navigation__icon:after {
-  top: 0.8rem;
-}
 .navigation__button:hover .navigation__icon::before {
   top: -1rem;
 }
@@ -860,7 +995,7 @@ body {
 .section-about {
   background-color: #f7f7f7;
   padding: 25rem 0;
-  margin-top: -20vh;
+  margin-top: -15vh;
 }
 
 .section-features {

@@ -6,8 +6,8 @@
 
   &__button {
     background-color: $color-white;
-    height: 7rem;
-    width: 7rem;
+    height: 5rem;
+    width: 5rem;
     border-radius: 50%;
     position: fixed;
     top: 6rem;
@@ -16,11 +16,16 @@
     box-shadow: 0 1rem 3rem rgba($color-black, .8);
     text-align: center;
     cursor: pointer;
+
+    @include respond(tab-land) {
+      top: 4rem;
+      right: 4rem;
+    }
   }
 
   &__background {
-    height: 6rem;
-    width: 6rem;
+    height: 4rem;
+    width: 4rem;
     border-radius: 50%;
     position: fixed;
     top: 6.5rem;
@@ -29,6 +34,44 @@
     z-index: 1000;
 
     transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+
+    @include respond(tab-land) {
+      top: 4.5rem;
+      right: 4.5rem;
+    }
+
+  }
+
+  &__icon {
+    position: relative;
+    margin-top: 2.5rem; // move it down a little bit
+
+    &,
+    &:before,
+    &:after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-gray-dark-3;
+      display: inline-block;
+      transition: all .2s;
+    }
+
+    &:before,
+    &:after{
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    &:before {
+      top: -.8rem;
+      //transform-origin: center;
+    }
+
+    &:after {
+      top: .8rem;
+      // transform-origin: center;
+    }
   }
 
   &__nav {
@@ -93,38 +136,6 @@
     width: 100%;
   }
 
-  // ICON
-  &__icon {
-    position: relative;
-    margin-top: 3.5rem; // move it down a litle bit
-
-    &,
-    &:before,
-    &:after {
-      width: 3rem;
-      height: 2px;
-      background-color: $color-gray-dark-3;
-      display: inline-block;
-      transition: all .2s;
-    }
-
-    &:before,
-    &:after{
-      content: "";
-      position: absolute;
-      left: 0;
-    }
-
-    &:before {
-      top: -.8rem;
-      //transform-origin: center;
-    }
-
-    &:after {
-      top: .8rem;
-      // transform-origin: center;
-    }
-  }
 
   &__button:hover &__icon::before {
     top: -1rem;

@@ -11,9 +11,45 @@ the following selects does a reset: selects every element, and sets properties t
 
 html {
     // this defines what 1 rem is
-    font-size: 62.5%; /* 10 in order to simplify calculations relative to this: 1rem = 10px, 2rem = 20px ... */
+    // 1rem = 10px;
+    // default font-size = 16px
+    // 10px/16px = 62.5%
+    /* we set 1rem to 10px in order to simplify calculations relative to this: 1rem = 10px, 2rem = 20px ... */
+    font-size: 62.5%;
+
+    /*
+        It's important to use the larger ones in from of the smaller ones, since if screen size is 500px,
+        both will apply, but the latter one will be finally applied because it is defined later
+     */
+
+    @include respond(tab-land) { // width <= 1200px
+        // 1rem = 9px, 9/16 = 56.25%
+        font-size: 56.25%;
+    }
+
+    @include respond(tab-port) { // width <= 900px
+        // 1rem = 8px, 8/16 = 50%
+        font-size: 50%;
+    }
+
+
+    // we don't need this since we don't want to set font-size to lower than 50%
+    //@include respond(phone) {
+    //    font-size: 50%;
+    //}
+
+    @include respond(big-desktop) {
+        // 1rem = 12px, 12/16 = 75%
+        font-size: 75%;
+    }
 }
 
 body {
     box-sizing: border-box;
+    padding: 3rem;
+
+    @include respond(tab-land) {
+        padding: 0;
+    }
+
 }
