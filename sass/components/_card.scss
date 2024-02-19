@@ -188,4 +188,51 @@
     font-weight: 100;
   }
 
+  @include respond(tab-port) {
+    // for tablets and below, the back side will appear under the front side, because there is no hover on touch devices
+    // that will trigger the 180deg rotation
+    height: auto;
+    border-radius: $default-border-radius;
+    background-color: $color-white;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+
+    &__side {
+      height: auto;
+      position: relative;
+      box-shadow: none;
+
+      &--back {
+        transform: rotateY(0);
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+      }
+    }
+
+    &:hover &__side--front {
+      transform: rotateY(0);
+    }
+
+    .card__details {
+      padding: 1rem;
+    }
+
+    // code for front side styling
+    &__cta {
+      position: relative;
+      top: 0;
+      left: 0;
+      transform: translate(0);
+      width: 100%;
+      padding: 7rem 4rem;
+    }
+
+    &__price-box {
+      margin-bottom: 3rem;
+    }
+
+    &__price-value {
+      font-size: 4rem;
+      font-weight: 100;
+    }
+  }
+
 }

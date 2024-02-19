@@ -8,6 +8,12 @@
   font-size: $default-font-size;
   transform: skewX(-12deg);
 
+  @include respond(tab-port) {
+    width: 100%;
+    transform: skewX(0);
+    padding: 4rem 4rem 4rem 7rem;
+  }
+
   & > * {
     transform: skewX(12deg);
   }
@@ -22,12 +28,24 @@
     -webkit-clip-path: circle(50% at 50% 50%);
     transform: translateX(-2rem) skewX(12deg);
     position: relative;
+
+    @include respond(tab-port) {
+      transform: translateX(-2rem) skewX(0);
+    }
   }
 
   &__image {
     height: 100%;
     transform: translateX(-4rem) scale(1.4);
     transition: all .5s ease;
+  }
+
+  &__text {
+    transform: skewX(12deg);
+
+    @include respond(tab-port) {
+      transform: skewX(0);
+    }
   }
 
   &:hover &__image {
