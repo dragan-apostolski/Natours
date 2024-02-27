@@ -188,7 +188,7 @@
     font-weight: 100;
   }
 
-  @include respond(tab-port) {
+  @include respond(tab-port, none) {
     // for tablets and below, the back side will appear under the front side, because there is no hover on touch devices
     // that will trigger the 180deg rotation
     height: auto;
