@@ -11,8 +11,6 @@
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
     position: relative;
 
-
-
     @media (min-resolution: 192dpi) and (min-width: 37.5em) {
         // if the resolution is higher than 192dpi and the width is higher than 600px (37.5em)
         // we display the bigger image
@@ -37,7 +35,6 @@
         clip-path: none;
         height: 100vh;
     }
-
 
     &__logo-box {
         position: absolute;
