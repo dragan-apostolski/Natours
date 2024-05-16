@@ -1,7 +1,7 @@
 # Natours
 A demo website for an agency that offers hiking tours. This project was built while taking a course in Advanced CSS. 
 
-You can check out the video demo on this [link](https://youtu.be/bC8xvoF9LKI?si=VA32yF0W0QuphxUI), or browse through the screenshots below.
+You can check out the video demo for the desktop version on this [link](https://youtu.be/bC8xvoF9LKI?si=VA32yF0W0QuphxUI), and for the mobile version on [this one](https://youtube.com/shorts/35vffniyUMw). 
 
 ## Screenshots
 <img width="2039" alt="image" src="https://github.com/dragan-apostolski/Natours/assets/22579410/5475eaac-e27f-4ace-b486-f50b85dbf7a0">
